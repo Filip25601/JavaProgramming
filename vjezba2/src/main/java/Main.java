@@ -12,9 +12,11 @@ public class Main {
 
         TemperatureMeter temperatureMeter = new TemperatureMeter(client);
         PressureMeter pressureMeter = new PressureMeter(client);
+        ShortTermMeter shortTermMeter = new ShortTermMeter(client);
 
         temperatureMeter.sendAllData();
         pressureMeter.sendAllData();
+        shortTermMeter.sendAllData();
         System.out.println("Data published.");
 
 
