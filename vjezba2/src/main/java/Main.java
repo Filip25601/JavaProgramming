@@ -13,12 +13,14 @@ public class Main {
         TemperatureMeter temperatureMeter = new TemperatureMeter(client);
         PressureMeter pressureMeter = new PressureMeter(client);
         ShortTermMeter shortTermMeter = new ShortTermMeter(client);
+        LongTermMeter longTermMeter = new LongTermMeter(client);
 
         temperatureMeter.sendAllData();
         pressureMeter.sendAllData();
         shortTermMeter.sendAllData();
+        longTermMeter.sendAllData();
         System.out.println("Data published.");
-
+        Thread.sleep(1000);
 
         client.disconnect();
     }

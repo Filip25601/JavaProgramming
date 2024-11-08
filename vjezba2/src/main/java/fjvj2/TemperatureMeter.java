@@ -14,10 +14,9 @@ public class TemperatureMeter extends Meter {
     }
     @Override
     public void sendAllData() throws MqttException {
-        short Temperature = (short) (generateTemperature() / 10.0);
-
+        short Temperature = (short) (generateTemperature() / 10);
         System.out.println("Temperature: " + Temperature + " °C");
-        publishData("waterFlowMeter/temperature", String.valueOf(Temperature));
+        publishData("WaterFlowMeter/temperature", String.valueOf(Temperature));
     }
 
 }

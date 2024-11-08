@@ -7,7 +7,7 @@ import java.util.Random;
 
 //import java.util.Random;
 public class ShortTermMeter extends Meter {
-    private Random rand = new Random();
+    private final Random rand = new Random();
     public ShortTermMeter(IMqttClient client) {
         super(client);
     }

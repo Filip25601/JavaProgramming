@@ -8,13 +8,13 @@ public class PressureMeter extends Meter {
         super(client);
     }
     public double generatePressure() {
-        return rand.nextInt(65336)/1000;
+        return rand.nextInt(65336)/1000.0;
     }
     @Override
     public void sendAllData()throws MqttException {
         double pressure = generatePressure();
         System.out.println("Pressure: "+ pressure+ " Bar");
-        publishData("WaterFlowMeter/pressure", String.valueOf(pressure));
+        publishData("WaterFlowMeter/Pressure", String.valueOf(pressure));
     }
 
 
