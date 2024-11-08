@@ -20,7 +20,6 @@ public class Main {
         shortTermMeter.sendAllData();
         longTermMeter.sendAllData();
         System.out.println("Data published.");
-        Thread.sleep(1000);
 
         client.disconnect();
     }

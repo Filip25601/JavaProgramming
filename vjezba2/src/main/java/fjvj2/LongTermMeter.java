@@ -4,7 +4,7 @@ import org.eclipse.paho.client.mqttv3.*;
 import java.util.Random;
 
 public class LongTermMeter extends Meter {
-    private Random rand = new Random();
+    private final Random rand = new Random();
 
     public LongTermMeter (IMqttClient client) {
         super(client);

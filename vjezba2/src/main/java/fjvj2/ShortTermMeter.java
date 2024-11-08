@@ -3,7 +3,6 @@ package fjvj2;
 import org.eclipse.paho.client.mqttv3.*;
 import java.util.Random;
 
-//import java.util.Random;
 public class ShortTermMeter extends Meter {
     private final Random rand = new Random();
     public ShortTermMeter(IMqttClient client) {
