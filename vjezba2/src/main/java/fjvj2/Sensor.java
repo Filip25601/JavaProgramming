@@ -5,63 +5,36 @@ import java.util.Random;
 public class Sensor {
     private IMqttClient client;
     private Random random;
+    private double minValue, maxValue;
     private String unit;
+    private String sensorName;
 
+    public Sensor(IMqttClient client,String sensorName ,double minValue, double maxValue, String unit) {
+        this.client = client;
+        this.minValue = minValue;
+        this.maxValue = maxValue;
+        this.unit = unit;
+        this.sensorName = sensorName;
+        this.random = new Random();
+    }
+    /*
     public Sensor(IMqttClient client) {
         this.client = client;
         this.random = new Random();
+    }*/
+    public double generateValue(){
+        return minValue + random.nextDouble(maxValue - minValue + 1);
     }
-    public int generateTemperature() {
-        unit = "°C";
-        return (-32668 + random.nextInt(65336));
-    }
-    public int generatePressure() {
-        unit = "Bar";
-        return random.nextInt(65535);
-    }
-    public int generateConsumptionShorter(){
-        unit = "L";
-        return random.nextInt(65535);
-    }
-    public int generateConsumptionLonger(){
-        unit = "m³";
-        return random.nextInt(65535);
-    }
+
     private void publishData(String topic, String data)throws MqttException {
         MqttMessage message = new MqttMessage(data.getBytes());
         message.setQos(0);
         client.publish(topic, message);
     }
 
-    public void sendData()throws MqttException{
-        int temperature = generateTemperature() / 10;
-        System.out.println("Temperature: " + temperature + " " + unit);
-        publishData("Temperature", String.valueOf(temperature));
-
-        int Pressure = generatePressure() / 1000;
-        System.out.println("Pressure: " + Pressure + " " + unit);
-        publishData("Pressure", String.valueOf(Pressure));
-
-        int consumption1min = generateConsumptionShorter();
-        int consumption10min = generateConsumptionShorter();
-        int consumption1hour = generateConsumptionShorter();
-        int consumption1day = generateConsumptionShorter();
-
-        System.out.println("consumption1min: " + consumption1min + " " + unit);
-        System.out.println("consumption10min: " + consumption10min + " " + unit);
-        System.out.println("consumption1hour: " + consumption1hour + " " + unit);
-        System.out.println("consumption1day: " + consumption1day + " " + unit);
-        publishData("consumption1min", String.valueOf(consumption1min));
-        publishData("consumption10min", String.valueOf(consumption10min));
-        publishData("consumption1hour", String.valueOf(consumption1hour));
-        publishData("consumption1day", String.valueOf(consumption1day));
-
-        int consumption1week = generateConsumptionLonger() / 10;
-        int consumption1month = generateConsumptionLonger() / 10;
-        int consumption1year = generateConsumptionLonger() / 10;
-        System.out.println("consumption1week: " + consumption1week + " " + unit);
-        System.out.println("consumption1month: " + consumption1month + " " + unit);
-        System.out.println("consumption1year: " + consumption1year + " " + unit);
+    public void sendData(String topic)throws MqttException{
+        double Value = generateValue();
+        System.out.println(sensorName + ": " + Value + " " + unit);
+        publishData(topic,String.valueOf(Value));
     }
-
 }
