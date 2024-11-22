@@ -30,7 +30,8 @@ public class Sensor {
 
     public void sendData(String topic)throws MqttException{
         double Value = generateValue();
-        System.out.println(sensorName + ": " + Value + " " + unit);
+        String FValue = String.format("%.4f", Value);
+        System.out.println(sensorName + ": " + FValue + " " + unit);
         publishData(topic,String.valueOf(Value));
     }
 }
