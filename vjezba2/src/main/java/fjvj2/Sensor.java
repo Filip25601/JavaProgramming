@@ -17,11 +17,7 @@ public class Sensor {
         this.sensorName = sensorName;
         this.random = new Random();
     }
-    /*
-    public Sensor(IMqttClient client) {
-        this.client = client;
-        this.random = new Random();
-    }*/
+
     public double generateValue(){
         return minValue + random.nextDouble(maxValue - minValue + 1);
     }
