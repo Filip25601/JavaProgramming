@@ -18,7 +18,8 @@ public class Main {
         pressureSensor.sendData("Pressure");
         shortTermSensor.sendData("ShortTermConsumption");
         longTermSensor.sendData("LongTermConsumption");
-        
+
         client.disconnect();
+        client.close();
     }
 }
