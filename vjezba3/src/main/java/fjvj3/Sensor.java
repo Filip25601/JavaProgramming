@@ -26,12 +26,6 @@ public class Sensor {
         return "Device: " + sensorName + " value: "+ value + " unit: " + unit;
     }
 
-
-
-
-
-
-
     public double getMinValue() {
         return minValue;
     }

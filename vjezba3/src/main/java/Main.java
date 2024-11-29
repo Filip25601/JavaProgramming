@@ -1,5 +1,4 @@
 import fjvj3.*;
-import com.google.gson.*;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -13,7 +12,7 @@ public class Main {
         device.addSensor(pressureSensor);
         device.addSensor(shortTermSensor);
         device.addSensor(longTermSensor);
-        device.sendData();
+        //device.sendData();
         /*
         Gson gson = new Gson();
         String json = gson.toJson(device);
@@ -21,8 +20,7 @@ public class Main {
         */
 
         String jsonPath ="src/main/resources/serialised.json";
-
-        Device device1 = Deserialization.loadDeviceConfig(jsonPath);
+        Device device1 = Deserialization.loadDevice(jsonPath);
         System.out.println(device1.listSensors());
     }
 }

@@ -7,7 +7,6 @@ import java.util.List;
 public class Device {
     private List<Sensor> Sensors;
     private transient IMqttClient mqttClient;
-    private String jsonPath;
     private String BrokerUrl;
     private String DeviceName;
 
@@ -26,9 +25,6 @@ public class Device {
     public void addSensor(Sensor sensor) {
         Sensors.add(sensor);
     }
-    public Device (String jsonPath) {
-        this.jsonPath = jsonPath;
-    }
 
     public void sendData() throws MqttException {
         mqttClient.connect();
@@ -42,13 +38,6 @@ public class Device {
         }
         mqttClient.disconnect();
         mqttClient.close();
-    }
-
-    public String getDeviceName() {
-        return DeviceName;
-    }
-    public List<Sensor> getSensors() {
-        return Sensors;
     }
     public String listSensors() {
         if (Sensors.isEmpty()) {
