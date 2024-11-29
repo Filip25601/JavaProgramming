@@ -12,7 +12,7 @@ public class Main {
         device.addSensor(pressureSensor);
         device.addSensor(shortTermSensor);
         device.addSensor(longTermSensor);
-        //device.sendData();
+        device.sendData();
         /*
         Gson gson = new Gson();
         String json = gson.toJson(device);
@@ -21,6 +21,7 @@ public class Main {
 
         String jsonPath ="src/main/resources/serialised.json";
         Device device1 = Deserialization.loadDevice(jsonPath);
+        assert device1 != null;
         System.out.println(device1.listSensors());
     }
 }
