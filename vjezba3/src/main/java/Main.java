@@ -7,13 +7,14 @@ public class Main {
         Sensor pressureSensor = new Sensor( "PressureSensor",0, 65.336, "Bar");
         Sensor shortTermSensor = new Sensor( "ShortTermSensor",0, 65336, "L");
         Sensor longTermSensor = new Sensor( "LongTermSensor",0, 6533.6, "m³");
-        Device device = new Device("Device","tcp://broker.hivemq.com:1883");
+        Device device = new Device("Device","tcp://test.mosquitto.org:1883");
         device.addSensor(temperatureSensor);
         device.addSensor(pressureSensor);
         device.addSensor(shortTermSensor);
         device.addSensor(longTermSensor);
         device.sendData();
         /*
+        "tcp://broker.hivemq.com:1883"
         Gson gson = new Gson();
         String json = gson.toJson(device);
         System.out.println(json);
