@@ -11,5 +11,4 @@ public interface BookRepository extends JpaRepository<Book, Long>
 {
     @Query("SELECT s FROM Book s WHERE s.title = ?1")
     Optional<Book> findByTitle(String title);
-
 }
