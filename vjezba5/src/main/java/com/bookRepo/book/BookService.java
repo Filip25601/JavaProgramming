@@ -1,5 +1,7 @@
 package com.bookRepo.book;
 
+import com.bookRepo.exception.BookNotFoundException;
+import com.bookRepo.exception.InvalidRequestException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -43,7 +45,7 @@ public class BookService {
         System.out.println(book);
         Optional<Book> BookByTitle = bookRepository.findByTitle(book.getTitle());
         if (BookByTitle.isPresent()) {
-            throw new IllegalStateException("Book already exists");
+            throw new InvalidRequestException("Book already exists");
         }
         bookRepository.save(book);
     }
@@ -51,7 +53,7 @@ public class BookService {
     public void deleteBook(Long bookId) {
         boolean exists = bookRepository.existsById(bookId);
         if (!exists) {
-            throw new IllegalStateException("Book with the id " + bookId +" does not exist");
+            throw new BookNotFoundException("Book with the id " + bookId +" does not exist");
         }
         bookRepository.deleteById(bookId);
     }
@@ -59,11 +61,11 @@ public class BookService {
     @Transactional
     public void updateBook(Long bookId, String title, String author) {
         Book book = bookRepository.findById(bookId).orElseThrow(() ->
-        new IllegalStateException("Book with the id " + bookId + " does not exist"));
+        new BookNotFoundException("Book with the id " + bookId + " does not exist"));
         if (title != null && !title.isEmpty() && !Objects.equals(book.getTitle(), title)) {
             Optional<Book> BookByTitle = bookRepository.findByTitle(title);
             if (BookByTitle.isPresent()) {
-                throw new IllegalStateException("Book already exists");
+                throw new InvalidRequestException("Book already exists");
             }
             book.setTitle(title);
         }
