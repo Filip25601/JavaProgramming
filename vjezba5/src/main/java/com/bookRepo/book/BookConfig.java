@@ -28,9 +28,41 @@ public class BookConfig {
                     1973,
                     176
             );
+            Book C =new Book(
+                    "Hyperion",
+                    "Dan Simmons",
+                    "Science Fiction",
+                    "Doubleday",
+                    1989,
+                    482
+            );
+            Book D = new Book(
+                    "Mistborn:The Final Empire",
+                    "Brandon Sanderson",
+                    "Fantasy",
+                    "Tor Books",
+                    2006,
+                    541
+            );
+            Book E = new Book(
+                    "Mistborn:The Well of Ascension",
+                    "Brandon Sanderson",
+                    "Fantasy",
+                    "Tor Books",
+                    2007,
+                    590
+            );
+            Book F = new Book(
+                    "Mistborn:The Hero of Ages",
+                    "Brandon Sanderson",
+                    "Fantasy",
+                    "Tor Books",
+                    2008,
+                    572
+            );
 
             repo.saveAll(
-                    List.of(A,B)
+                    List.of(A,B,C,D,E,F)
             );
         };
     }

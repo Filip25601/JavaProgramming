@@ -2,6 +2,10 @@ package com.bookRepo.book;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,8 +21,17 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 
-    public List<Book> getBooks() {
-        return bookRepository.findAll();
+
+//    public List<Book> getAllBooks(int pageNumber, int pageSize, String sort) {
+//        Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by(sort));
+//        Page<Book> books = bookRepository.findAll(pageable);
+//        return books.getContent();
+//    }
+
+    public List<Book> searchBooks(String title, String author, String genre, Integer publishedYear, int pageNumber, int pageSize, String sortBy) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by(sortBy));
+        Page<Book> books = bookRepository.searchAndFilter(title, author, genre, publishedYear, pageable);
+        return books.getContent();
     }
 
     public void addNewBook(Book book) {
@@ -53,6 +66,5 @@ public class BookService {
             book.setAuthor(author);
         }
     }
-
 
 }
