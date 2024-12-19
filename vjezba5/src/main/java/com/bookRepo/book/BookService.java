@@ -28,8 +28,13 @@ public class BookService {
 //        return books.getContent();
 //    }
 
-    public List<Book> searchBooks(String title, String author, String genre, Integer publishedYear, int pageNumber, int pageSize, String sortBy) {
-        Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by(sortBy));
+    public List<Book> searchBooks(String title, String author, String genre, Integer publishedYear, int pageNumber, int pageSize, String[] sort) {
+        String sortField = sort[0];
+        String sortDirection = sort.length > 1 ? sort[1] : "asc";
+        Sort.Direction direction = sortDirection.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
+        Sort sortBy = Sort.by(direction, sortField);
+
+        Pageable pageable = PageRequest.of(pageNumber, pageSize, sortBy);
         Page<Book> books = bookRepository.searchAndFilter(title, author, genre, publishedYear, pageable);
         return books.getContent();
     }

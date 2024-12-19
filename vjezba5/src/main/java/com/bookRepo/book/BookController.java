@@ -32,7 +32,7 @@ public class BookController {
             @RequestParam(value = "publishedYear", required = false) Integer publishedYear,
             @RequestParam(value = "pageNum", defaultValue = "0", required = false) int pageNum,
             @RequestParam(value = "pageSize", defaultValue = "5", required = false) int pageSize,
-            @RequestParam(value = "sort", defaultValue = "title", required = false) String sort) {
+            @RequestParam(value = "sort", defaultValue = "title,asc", required = false) String[] sort) {
         return bookService.searchBooks(title, author, genre, publishedYear, pageNum, pageSize, sort);
     }
 
