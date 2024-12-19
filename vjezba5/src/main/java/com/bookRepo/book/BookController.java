@@ -1,6 +1,7 @@
 package com.bookRepo.book;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,10 +17,25 @@ public class BookController {
         this.bookService = bookService;
     }
 
+//    @GetMapping
+//    public List<Book> getBooks(@RequestParam(value = "pageNum",defaultValue = "0",required = false) int pageNum,
+//                               @RequestParam(value = "pageSize",defaultValue = "2",required = false) int pageSize,
+//                               @RequestParam(value = "sort",defaultValue = "id",required = false) String sort)            {
+//        return bookService.getAllBooks(pageNum,pageSize,sort);
+//    }
+
     @GetMapping
-    public List<Book> getBooks() {
-        return bookService.getBooks();
+    public List<Book> searchBooks(
+            @RequestParam(value = "title", required = false) String title,
+            @RequestParam(value = "author", required = false) String author,
+            @RequestParam(value = "genre", required = false) String genre,
+            @RequestParam(value = "publishedYear", required = false) Integer publishedYear,
+            @RequestParam(value = "pageNum", defaultValue = "0", required = false) int pageNum,
+            @RequestParam(value = "pageSize", defaultValue = "5", required = false) int pageSize,
+            @RequestParam(value = "sort", defaultValue = "title", required = false) String sort) {
+        return bookService.searchBooks(title, author, genre, publishedYear, pageNum, pageSize, sort);
     }
+
     @PostMapping
     public void addBook(@RequestBody Book book) {
         bookService.addNewBook(book);
