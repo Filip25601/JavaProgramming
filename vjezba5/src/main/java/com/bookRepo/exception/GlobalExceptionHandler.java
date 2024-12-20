@@ -11,7 +11,7 @@ import java.time.ZonedDateTime;
 @ControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(BookNotFoundException.class)
-    public ResponseEntity<Object> handleBookNotFoundException(BookNotFoundException e) {
+    public ResponseEntity<ApiException> handleBookNotFoundException(BookNotFoundException e) {
         ApiException apiException = new ApiException(
                 e.getMessage(),
                 HttpStatus.NOT_FOUND,
@@ -20,7 +20,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(apiException,HttpStatus.NOT_FOUND);
     }
     @ExceptionHandler(InvalidRequestException.class)
-    public ResponseEntity<Object> handleInvalidRequestException(InvalidRequestException e) {
+    public ResponseEntity<ApiException> handleInvalidRequestException(InvalidRequestException e) {
         ApiException apiException = new ApiException(
                 e.getMessage(),
                 HttpStatus.BAD_REQUEST,
