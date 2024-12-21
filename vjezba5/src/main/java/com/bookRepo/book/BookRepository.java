@@ -14,6 +14,7 @@ public interface BookRepository extends JpaRepository<Book, Long>
     @Query("SELECT s FROM Book s WHERE s.title = ?1")
     Optional<Book> findByTitle(String title);
 
+    //bez queria naci
     @Query("SELECT b FROM Book b WHERE " +
             "(LOWER(b.title) LIKE LOWER(CONCAT('%', :title, '%')) OR :title IS NULL) AND " +
             "(LOWER(b.author) LIKE LOWER(CONCAT('%', :author, '%')) OR :author IS NULL) AND " +
