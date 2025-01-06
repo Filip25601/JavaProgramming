@@ -8,8 +8,8 @@ import lombok.*;
 @ToString
 
 @Entity
-@Table
-public class notification {
+@Table(name = "notifications")
+public class Notification {
     @Id
     @SequenceGenerator(
             name = "notification_sequence",
@@ -25,6 +25,13 @@ public class notification {
     private String message;
     private String date;
     private String time;
-    private String type;
-    private String url;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "memberId",nullable = false)
+    private Member member;
+
+    public Notification(String message, String date) {
+        this.message = message;
+        this.date = date;
+    }
 }

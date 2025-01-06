@@ -2,13 +2,17 @@ package com.bookRepo.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
 
 @Entity
-@Table
+@Table(name = "books")
 public class Book {
     @Id
     @SequenceGenerator(
@@ -36,4 +40,8 @@ public class Book {
         this.publishedYear = publishedYear;
         this.pages = pages;
     }
+
+    @OneToMany(mappedBy = "book",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Reservation> reservations = new ArrayList<>();
+
 }

@@ -8,7 +8,7 @@ import lombok.*;
 @ToString
 
 @Entity
-@Table
+@Table(name = "reservations")
 public class Reservation {
     @Id
     @SequenceGenerator(
@@ -21,11 +21,17 @@ public class Reservation {
             generator = "reservation_sequence"
     )
     private Long id;
-    private int bookId;
-    private int userId;
-    private int reservationId;
     private String reservationDate;
     private String reservationTime;
     private String reservationStatus;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "memberId",nullable = false)
+    private Member member;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "bookId",nullable = false)
+    private Book book;
+
 
 }
