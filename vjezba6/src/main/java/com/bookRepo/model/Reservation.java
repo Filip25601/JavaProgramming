@@ -25,13 +25,23 @@ public class Reservation {
     private String reservationTime;
     private String reservationStatus;
 
+    @Getter
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memberId",nullable = false)
     private Member member;
 
+    @Getter
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bookId",nullable = false)
     private Book book;
 
-
+    public Long getBookId() {
+        return book.getId();
+    }
+    public Long getMemberId() {
+        return member.getId();
+    }
+    public String getBookTitle() {
+        return book.getTitle();
+    }
 }

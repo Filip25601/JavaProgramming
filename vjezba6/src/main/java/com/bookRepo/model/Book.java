@@ -1,5 +1,6 @@
 package com.bookRepo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -42,6 +43,7 @@ public class Book {
     }
 
     @OneToMany(mappedBy = "book",cascade = CascadeType.ALL,orphanRemoval = true)
+    @JsonIgnore
     private List<Reservation> reservations = new ArrayList<>();
 
 }
