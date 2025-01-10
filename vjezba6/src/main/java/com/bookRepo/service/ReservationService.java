@@ -1,5 +1,6 @@
 package com.bookRepo.service;
 
+import com.bookRepo.exception.BookNotFoundException;
 import com.bookRepo.model.*;
 import com.bookRepo.model.Book;
 import com.bookRepo.model.Reservation;
@@ -44,7 +45,7 @@ public class ReservationService {
     }
 
     public void fulfillReservation(Long id) {
-        Reservation reservation = reservationRepository.findById(id).orElseThrow(()-> new RuntimeException("Reservation not found"));
+        Reservation reservation = reservationRepository.findById(id).orElseThrow(()-> new BookNotFoundException("Reservation not found"));
             reservation.setReservationStatus("Fulfilled");
             reservationRepository.save(reservation);
             String message = String.format("Knjiga %s je sada dostupna za posudbu.", reservation.getBook().getTitle());
